@@ -20,7 +20,7 @@ Add this to your `~/.claude/settings.json` in the hooks section:
     "hooks": [
       {
         "type": "command",
-        "command": "/Users/dmitry/projects/learning-eng-prompts-hook/check_english_opencode.sh"
+        "command": "/full/path/to/claude-code-grammar-hook/check_english_opencode.sh"
       }
     ]
   }
@@ -38,7 +38,7 @@ If you don't have a hooks section yet, create it:
         "hooks": [
           {
             "type": "command",
-            "command": "/Users/dmitry/projects/learning-eng-prompts-hook/check_english_opencode.sh"
+            "command": "/full/path/to/claude-code-grammar-hook/check_english_opencode.sh"
           }
         ]
       }

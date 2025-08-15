@@ -2,7 +2,21 @@
 
 Grammar checking hook for Claude Code that displays grammar feedback in the status line without blocking prompts.
 
-## Setup
+## Quick Setup
+
+Clone this repository and run the auto-installer:
+
+```bash
+git clone https://github.com/nasonov-coder/claude-code-grammar-hook.git
+cd claude-code-grammar-hook
+```
+
+Then in Claude Code, run:
+```bash
+/install
+```
+
+## Manual Setup
 
 ### 1. Add Hook to Claude Code Settings
 
@@ -11,7 +25,7 @@ Add hook using `/hooks` command in Claude Code:
 ```bash
 /hooks
 # Select: UserPromptSubmit  
-# Command: /path/to/check_english_opencode.sh
+# Command: /full/path/to/check_english_opencode.sh
 ```
 
 Or manually add to `~/.claude/settings.json`:
@@ -25,7 +39,7 @@ Or manually add to `~/.claude/settings.json`:
         "hooks": [
           {
             "type": "command", 
-            "command": "/Users/dmitry/projects/learning-eng-prompts-hook/check_english_opencode.sh"
+            "command": "/full/path/to/check_english_opencode.sh"
           }
         ]
       }
