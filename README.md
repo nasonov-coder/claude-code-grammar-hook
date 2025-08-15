@@ -6,7 +6,15 @@ Grammar checking hook for Claude Code that displays grammar feedback in the stat
 
 ### 1. Add Hook to Claude Code Settings
 
-Add to `~/.claude/settings.json`:
+Add hook using `/hooks` command in Claude Code:
+
+```bash
+/hooks
+# Select: UserPromptSubmit  
+# Command: /path/to/check_english_opencode.sh
+```
+
+Or manually add to `~/.claude/settings.json`:
 
 ```json
 {
@@ -16,21 +24,35 @@ Add to `~/.claude/settings.json`:
         "matcher": "",
         "hooks": [
           {
-            "type": "command",
+            "type": "command", 
             "command": "/Users/dmitry/projects/learning-eng-prompts-hook/check_english_opencode.sh"
           }
         ]
       }
     ]
-  },
-  "statusLine": {
-    "type": "command",
-    "command": "input=$(cat); session_id=\"$(echo \"$input\" | jq -r '.session_id')\"; cwd=\"$(echo \"$input\" | jq -r '.workspace.current_dir')\"; english_fix=\"$HOME/.claude/english-fix/$session_id\"; if [ -f \"$english_fix\" ]; then grammar_status=\"$(cat \"$english_fix\")\"; printf '\\033[1;32m➜\\033[0m \\033[36m%s\\033[0m \\033[33m%s\\033[0m' \"$(basename \"$cwd\")\" \"$grammar_status\"; else printf '\\033[1;32m➜\\033[0m \\033[36m%s\\033[0m' \"$(basename \"$cwd\")\"; fi"
   }
 }
 ```
 
-### 2. Make Script Executable
+### 2. Configure Status Line
+
+Run this command in Claude Code to set up the status line integration:
+
+```bash
+/statusline look at this project files. script will be called as hook after user message. so we would need to output this message to .claude/english-fix - one file per session. so it will be displayed at status line. also backup previous conf. and make @check_english_opencode.sh output more concise
+
+UserPromptSubmit Input
+
+{
+  "session_id": "abc123",
+  "transcript_path": "/Users/.../.claude/projects/.../00893aaf-19fa-41d2-8238-13269b9b3ca0.jsonl",
+  "cwd": "/Users/...",
+  "hook_event_name": "UserPromptSubmit",
+  "prompt": "Write a function to calculate the factorial of a number"
+}
+```
+
+### 3. Make Script Executable
 
 ```bash
 chmod +x check_english_opencode.sh
